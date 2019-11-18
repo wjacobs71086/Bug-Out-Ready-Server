@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS bag_items;

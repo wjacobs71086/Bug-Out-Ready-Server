@@ -29,12 +29,16 @@ const AuthService = {
     });
   },
   addUser(db, user_name, password) {
-    password = `${bcrypt.hash(password, 10).then(hash => hash)}`;
-    return db('bugout_users')
-      .insert({
-        user_name: user_name,
-        password: password
-      });
+
+    password = bcrypt.hash(password, 10).then(function(hash) {
+      // Store hash in your password DB.
+      return db('bugout_users')
+        .insert({
+          user_name: user_name,
+          password: hash
+        });
+  });
+    return console.log(password);
   }
 };
 

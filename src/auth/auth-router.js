@@ -51,16 +51,20 @@ authRouter
                 return res.status(400).json({
                     error: `Missing ${key} in request body`
                 });
-        AuthService.addUser(req.app.get('db'), user_name, password)
-            .then(res => {
-                if(!res.ok){
-                    console.log(res.error);
-                } else {
-                    return res.status(201).json({
-                        message:'user created'
-                    });
-                }
-            }).catch(next);
+        AuthService.addUser(req.app.get('db'), user_name, password);
+            // .then(res => {
+            //     console.log(res);
+            //     if(!res.ok){
+            //         console.log('we have a problem', res.error);
+            //         next();
+            //     } else {
+            //         return res.status(201).json({
+            //             message:'user created'
+            //         });
+            //     }
+            // }).catch(next);
+           next();
+           return res.status(201);
     });
 
 

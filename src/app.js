@@ -24,7 +24,7 @@ const morganOption = (NODE_ENV === 'production')
 
   app.use('/api/auth', authRouter);
   app.use('/items', itemsRouter);
-  app.use('/bags', bagsRouter);
+  app.use('/bag-home', bagsRouter);
 
   app.use(function errorHandler(error,req,res,next) {
     let response;

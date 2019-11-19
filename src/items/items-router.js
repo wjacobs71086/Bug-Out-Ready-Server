@@ -16,7 +16,6 @@ itemsRouter
   itemsRouter
   .route('/:item_id')
   .get((req, res) => {
-      console.log(req.params.item_id);
       ItemsService.getById(req.app.get('db'), `${req.params.item_id}`)
       .then(item => res.json(item));
   });

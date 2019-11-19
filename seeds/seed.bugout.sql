@@ -31,6 +31,9 @@ VALUES
 
 INSERT INTO bag_items (item_id, user_id, bag_id, owned)
 VALUES
-(1, 1, 1, FALSE);
+(1, 1, 1, FALSE),
+(2,1,1,false),
+(6,1,1,false)
+;
 
 COMMIT;

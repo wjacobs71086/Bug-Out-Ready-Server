@@ -23,6 +23,11 @@ const BagsService = {
         .join('bugout_items', 'item_id', '=', 'bugout_items.id')
         .where('bag_id', id);
     },
+    getUserBags(db,user_id) {
+      return db
+        .from('user_bags AS bags')
+        .where('user_id', user_id);
+    },
   };
   
   module.exports = BagsService;

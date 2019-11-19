@@ -17,11 +17,6 @@ const morganOption = (NODE_ENV === 'production')
   app.use(helmet());
   app.use(cors());
 
-
-  // app.get('/', (req,res) => {
-  //   res.send('Hello, world');
-  // });
-
   app.use('/api/auth', authRouter);
   app.use('/items', itemsRouter);
   app.use('/bag-home', bagsRouter);

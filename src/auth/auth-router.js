@@ -41,12 +41,27 @@ authRouter
         
     });
 
+    authRouter 
+    .post('/sign-up',jsonBodyParser, (req,res,next) => {
+        const { user_name, password } = req.body;
+        const loginUser = { user_name, password };
 
-// authRouter
-//     .get('/login', jsonBodyParser, (req,res,next) => {
-//         const { user_name } = req.body;
-//         const loginUser = user_name;
-//         AuthService.getUserWithUserName( req.app.get('db'), loginUser)
-//             .then(res => console.log(res));
-//     });
+        for (const [key, value] of Object.entries(loginUser))
+            if(value == null)
+                return res.status(400).json({
+                    error: `Missing ${key} in request body`
+                });
+        AuthService.addUser(req.app.get('db'), user_name, password)
+            .then(res => {
+                if(!res.ok){
+                    console.log(res.error);
+                } else {
+                    return res.status(201).json({
+                        message:'user created'
+                    });
+                }
+            }).catch(next);
+    });
+
+
 module.exports = authRouter;

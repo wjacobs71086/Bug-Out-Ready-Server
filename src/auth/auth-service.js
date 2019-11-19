@@ -28,6 +28,14 @@ const AuthService = {
       algorithms: ['HS256'],
     });
   },
+  addUser(db, user_name, password) {
+    password = `${bcrypt.hash(password, 10).then(hash => hash)}`;
+    return db('bugout_users')
+      .insert({
+        user_name: user_name,
+        password: password
+      });
+  }
 };
 
 module.exports = AuthService;

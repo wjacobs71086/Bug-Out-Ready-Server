@@ -4,9 +4,9 @@ BEGIN;
 INSERT INTO bugout_users (id, user_name, password, active)
 
 VALUES
-(1, 'wesley', '$2a$10$LU1qO1B4TXSPM8Mhelpz1.UHVUC/D2zK9UwBHpDIRvfLy51cJ6jR2', true),
-(2, 'brittany', '$2a$10$LU1qO1B4TXSPM8Mhelpz1.UHVUC/D2zK9UwBHpDIRvfLy51cJ6jR2', true),
-(3, 'humphrey', '$2a$10$LU1qO1B4TXSPM8Mhelpz1.UHVUC/D2zK9UwBHpDIRvfLy51cJ6jR2', false)
+(1, 'dalinar', '$2a$10$LU1qO1B4TXSPM8Mhelpz1.UHVUC/D2zK9UwBHpDIRvfLy51cJ6jR2', true),
+(2, 'kip', '$2a$10$LU1qO1B4TXSPM8Mhelpz1.UHVUC/D2zK9UwBHpDIRvfLy51cJ6jR2', true),
+(3, 'readysetgo', '$2a$10$LU1qO1B4TXSPM8Mhelpz1.UHVUC/D2zK9UwBHpDIRvfLy51cJ6jR2', false)
 ;
 
 INSERT INTO user_bags (bag_id, user_id, bag_name, completed)

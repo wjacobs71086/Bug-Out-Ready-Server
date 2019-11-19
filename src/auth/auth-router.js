@@ -45,26 +45,22 @@ authRouter
     .post('/sign-up',jsonBodyParser, (req,res,next) => {
         const { user_name, password } = req.body;
         const loginUser = { user_name, password };
-
+        console.log('signing up');
         for (const [key, value] of Object.entries(loginUser))
             if(value == null)
                 return res.status(400).json({
                     error: `Missing ${key} in request body`
                 });
-        AuthService.addUser(req.app.get('db'), user_name, password);
-            // .then(res => {
-            //     console.log(res);
-            //     if(!res.ok){
-            //         console.log('we have a problem', res.error);
-            //         next();
-            //     } else {
-            //         return res.status(201).json({
-            //             message:'user created'
-            //         });
-            //     }
-            // }).catch(next);
-           next();
-           return res.status(201);
+        AuthService.addUser(req.app.get('db'), user_name, password)
+            .then(result => {
+                console.log('succession');
+                return res.status(201).json({
+                        message:'user created'
+                    });
+            }).catch(next => {
+                console.log('failed');
+                //next();
+            });
     });
 
 

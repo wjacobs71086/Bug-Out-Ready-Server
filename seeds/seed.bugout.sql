@@ -1,4 +1,4 @@
--- //psql -U dunder_mifflin -d blogful-auth -f ./seeds/seed.blogful_tables.sql
+-- //psql -U wesleyjacobs -d bugout -f ./seeds/seed.bugout.sql
 BEGIN;
 
 INSERT INTO bugout_users (id, user_name, password, active)

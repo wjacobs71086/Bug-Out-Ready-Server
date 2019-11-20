@@ -17,7 +17,7 @@ bagsRouter
   bagsRouter
   .route('/:bag_id')
   .get(requireAuth, (req, res) => {
-    console.log('getBagItems is being called', req.params);
+    console.log('getBagItems is being called', req.params.bag_id);
       BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => res.json(bag));
   });

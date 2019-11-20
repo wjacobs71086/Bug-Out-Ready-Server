@@ -16,6 +16,10 @@ const BagsService = {
           'bag_id',
           'item_id',
           'item_name',
+          'url',
+          'description',
+          'situation',
+          'est_cost',
           'img',
           'owned'
         )

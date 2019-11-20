@@ -30,7 +30,7 @@ const AuthService = {
   },
   addUser(db, user_name, password) {
     return password = bcrypt.hash(password, 10).then(function(hash) {
-      // Store hash in your password DB.
+      
       return db('bugout_users')
         .insert({
           user_name: user_name,

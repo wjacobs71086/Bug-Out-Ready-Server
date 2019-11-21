@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config');
 const authRouter = require('../src/auth/auth-router');
 const itemsRouter = require('../src/items/items-router');
 const bagsRouter = require('../src/bags/bags-router');
+const postBagsRouter = require('../src/bags/post-bag-router');
 const app = express();
 
 const morganOption = (NODE_ENV === 'production')
@@ -20,7 +21,7 @@ const morganOption = (NODE_ENV === 'production')
   app.use('/api/auth', authRouter);
   app.use('/items', itemsRouter);
   app.use('/bag-home', bagsRouter);
-  app.use('/situations', bagsRouter);
+  app.use('/situations', postBagsRouter);
   app.use('/bags', bagsRouter);
 
   app.use(function errorHandler(error,req,res,next) {

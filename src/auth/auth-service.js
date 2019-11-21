@@ -14,7 +14,7 @@ const AuthService = {
       .toString()
       .split(':');
   },
-  comparePasswords(password, hash){
+  comparePasswords(password, hash) {
     return bcrypt.compare(password, hash);
   },
   createJwt(subject, payload) {
@@ -29,14 +29,16 @@ const AuthService = {
     });
   },
   addUser(db, user_name, password) {
-    return password = bcrypt.hash(password, 10).then(function(hash) {
-      
-      return db('bugout_users')
-        .insert({
-          user_name: user_name,
-          password: hash
-        });
-  });
+    return password = bcrypt.hash(password, 10)
+      .then(function (hash) {
+        console.log('user_name', user_name);
+        console.log('hashed password', hash);
+        return db('bugout_users')
+          .insert({
+            user_name: user_name,
+            password: hash
+          });
+      });
   }
 };
 

@@ -39,9 +39,9 @@ const BagsService = {
         user_id: user_id
       })
       .returning('bag_id').then(rows => rows[0]);
-     // .first();
   },
   getSituationItems(db, situation) {
+    console.log('situation is entered in as', situation,'with type of', typeof situation);
     return db.select('id')
       .from('bugout_items')
       .whereRaw('situation = ?', [situation])
@@ -49,80 +49,18 @@ const BagsService = {
       .returning('id');
   },
   insertSituationItems(db, item_id, user_id, bag_id) {
-    //knex('bag_items').insert([{x: 20}, {y: 30},  {x: 10, y: 20}])
-    //console.log(itemsList);  
-    // console.log('item_id is', item_id);
-    // console.log('user_id is', user_id);
-    // console.log('bag_id is', bag_id);
+    //console.log('inside the insert situation items function');
     return db('bag_items')
       .insert({
         user_id,
         bag_id,
         item_id
       });
-
-
-
-    // return db('bag_items')
-    //   .returning('*')
-    //   .insert({
-    //     user_id,
-    //     bag_id,
-    //     item_id
-    //   });
   },
+  deleteBag(db,id){
+    console.log('delete call is being heard in the service');
+    console.log('this is the ID i got back', id);
+  }
 };
 
 module.exports = BagsService;
-
-
-
-// return itemsList.map(item => {
-//   return db('bag_items').insert({
-//     user_id,
-//     bag_id,
-//     item.id
-//   })
-// })
-
-
-
-
-      // let items = db('bugout_items')
-      //   .returning('item_id')
-      //   .select(
-      //     'id',
-      //     'situation'
-      //   )
-      //   .where('situation', 'any')
-      //   .andWhere('situation', `%${situation}%`);
-      //   items.map(item => db('bag_items')
-      //     .insert({
-      //       user_id,
-      //       bag_id,
-      //       item_id: item.id
-      //     }));
-
-
-
-
-              // .then(function(rows) {
-        //   return db.insert({item_id:`${id}`, user_id: `${user_id}`, bag_id: `${bag_id}`}, 'id').into('bag_items');
-        // })
-        // .then(function(id) {
-        //   console.log('Inserted item with ' + id);
-        // })
-        // .catch(function(error) { console.error(error); });
-
-
-
-
-      // return db.insert(
-      //   db.select('user_id, bag_id, item_id')
-      //     .from('bugout_items')
-      //     .where('situation', 'any')
-      //     .orWhere('situation', `%${situation}%`),
-      //     bag_id,
-      //     user_id
-      //   )
-      //   .into('bag_items');

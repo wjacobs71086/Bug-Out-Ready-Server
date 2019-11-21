@@ -47,21 +47,44 @@ const BagsService = {
         .orWhere('situation', 'any')
         .returning('id');
     },
-    insertSituationItems(db,item_ids, user_id, bag_id){
-      console.log('item_id in insert function',item_ids);
-      console.log('bag_id',bag_id);
-      console.log('user_id in insert function',user_id);
-      // item_ids.map(item =>
-      //     db('bag_items')
+    insertSituationItems(db, itemsList, user_id, bag_id){
+      //knex('bag_items').insert([{x: 20}, {y: 30},  {x: 10, y: 20}])
+      //console.log(itemsList);  
+        return itemsList.map(items =>{
+          let newId = items.id;
+          console.log(items.id);
+          return db('bag_items')
+          .insert({
+            user_id,
+            bag_id,
+            newId
+          });
+        });
+         
+     
+      // return db('bag_items')
+      //   .returning('*')
       //   .insert({
-      //     item_id: item.id,
-      //     bag_id: bag_id,
-      //     user_id: user_id
-      //   }));
-    },
+      //     user_id,
+      //     bag_id,
+      //     item_id
+      //   });
+   },
   };
   
   module.exports = BagsService;
+
+
+
+// return itemsList.map(item => {
+//   return db('bag_items').insert({
+//     user_id,
+//     bag_id,
+//     item.id
+//   })
+// })
+  
+
 
 
       // let items = db('bugout_items')

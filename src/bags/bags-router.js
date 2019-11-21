@@ -49,18 +49,21 @@ bagsRouter
           situation,
         );
         //console.log(itemsList);
-        const insertItems = await BagsService.insertSituationItems(
-          db,
-          itemsList,
-          user_id,
-          bag
-        );
-
-        //console.log(insertList);
+        try {
+          const insertItems = await BagsService.insertSituationItems(
+            db,
+            itemsList,
+            user_id,
+            bag
+          );
+        } catch(e) {
+          // console.log(e);
+          // console.error(e);
+        }
       };
 
       main();
-
+      next();
 
       // BagsService.createNewBag(
       //   req.app.get('db'),

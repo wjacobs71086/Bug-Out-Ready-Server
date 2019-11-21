@@ -4,6 +4,7 @@ const { requireAuth } = require('../middleware/jwt-auth');
 const bagsRouter = express.Router();
 const jsonBodyParser = express.json();
 
+
 bagsRouter
   .route('/')
   .get(requireAuth, (req, res, next) => {
@@ -26,26 +27,78 @@ bagsRouter
   bagsRouter
     .route('/')
     .post(requireAuth, jsonBodyParser, (req,res,next) => {
-      //const  bag_name  = req.body.bag_name;
+      const  bag_name  = req.body.bag_name;
+      //console.log('this is the bag_name', bag_name)
       const user_id = req.user.id;
+      //console.log('this is the user ID', user_id)
       const situation = req.body.situations;
-      
-      console.log(req.body);
-      BagsService.createNewBag(req.app.get('db'), req.body.bag_name, user_id)
-        .then(result => {
-          let newBagId = `${result}`;
-          BagsService.fillBagWithItems(
-                  req.app.get('db'),
-                  newBagId,
-                  user_id,
-                  situation
-                );
-          return res.status(201).json({
-            message: 'bag created'
-          });
-        }).catch(err => console.log(err.message));
-});
+      let db = req.app.get('db');
+      //let bag_id = req.body.bag_name;
 
+      async function main() {
+        //let bag_id;
+        const bag = await BagsService.createNewBag(
+          db,
+          bag_name,
+          user_id
+        );
+
+       // console.log(bag);
+        const itemsList = await BagsService.getSituationItems(
+          db,
+          situation,
+        );
+        //console.log(itemsList);
+        const insertItems = await BagsService.insertSituationItems(
+          db,
+          itemsList,
+          user_id,
+          bag
+        );
+
+        //console.log(insertList);
+      };
+
+      main();
+
+
+      // BagsService.createNewBag(
+      //   req.app.get('db'),
+      //   req.body.bag_name, 
+      //   user_id)
+      //   .then(bag => {
+      //     let bag_id = bag;
+
+      //     BagsService.getSituationItems(
+      //     req.app.get('db'),
+      //     situation
+      //   ).then(items => res.json(items));
+      //     //console.log('this is the bag_id',bag_id);
+      //     return [items, bag_id];
+      // })
+      //   .then(items => {
+      //     let bag_id = items[1];
+      //     let itemsList = items[0];
+      //     //console.log('itemsList', itemsList);
+      //     //console.log('user_id in promise chain', user_id);
+      //    return  BagsService.insertSituationItems(
+      //       req.app.get('db'),
+      //       itemsList,
+      //       user_id,
+      //       bag_id
+      //     );
+      //     //console.log(items);
+      //     //return res.json(items);
+      //   })
+      //   .catch(err => console.log(err.message));
+
+
+  });
 
 
   module.exports = bagsRouter;
+
+
+
+
+ 

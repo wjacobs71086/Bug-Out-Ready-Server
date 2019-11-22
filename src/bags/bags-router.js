@@ -39,9 +39,7 @@ bagsRouter
         if (!res) {
           console.log('this is bad news');
         } else {
-          return res.status(204).json({
-            message: 'bag deleted'
-          });
+          return console.log('its been deleted');
         }
       });
   });

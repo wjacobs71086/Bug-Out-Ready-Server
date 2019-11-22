@@ -58,8 +58,8 @@ const BagsService = {
       });
   },
   deleteBag(db,id){
-    console.log('delete call is being heard in the service');
-    console.log('this is the ID i got back', id);
+    return BagsService.getById(db, id)
+      .delete();
   }
 };
 

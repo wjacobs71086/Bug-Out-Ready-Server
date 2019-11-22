@@ -15,17 +15,20 @@ VALUES
 (2, 3, 'Doggie Bag', TRUE)
 ;
 
-INSERT INTO bugout_items (id, item_name, url, img, description, situation, est_cost)
+INSERT INTO bugout_items (item_name, url, img, description, situation, est_cost)
 VALUES
-(1,'Flashlight', 'www.amazon.com', 'www.amazon.com', 'A must have for any situation', 'any', 10),
-(2,'Band-aids','www.amazon.com','www.amazon.com','For wounds','any',15),
-(3,'Rope','www.amazon.com','www.amazon.com','quick tethering','any',10),
-(4,'Batteries','www.amazon.com','www.amazon.com','Some items will require batteries. extra points for rechargable','any',20),
-(5,'Matches','www.amazon.com','www.amazon.com','Fire starter','any',3),
-(6,'Knife','www.amazon.com','www.amazon.com','You can never have too many knives','any',15),
-(7,'Shovel','www.amazon.com','www.amazon.com','Dig out buried persons or items','Quake',20),
-(8,'Tarp','www.amazon.com','www.amazon.com','Keep whats important dry','Flood',25),
-(9,'Water','www.amazon.com','www.amazon.com','About a gallon a day per person','any',5)
+('Flashlight', 'www.amazon.com', 'www.amazon.com', 'A must have for any situation', 'any', 10),
+('Flashlight', 'www.amazon.com', 'www.amazon.com', 'A must have for any situation', 'Quake', 10),
+('Flashlight', 'www.amazon.com', 'www.amazon.com', 'A must have for any situation', 'Fire', 10),
+('Flashlight', 'www.amazon.com', 'www.amazon.com', 'A must have for any situation', 'Flood', 10),
+('Band-aids','www.amazon.com','www.amazon.com','For wounds','any',15),
+('Rope','www.amazon.com','www.amazon.com','quick tethering','any',10),
+('Batteries','www.amazon.com','www.amazon.com','Some items will require batteries. extra points for rechargable','any',20),
+('Matches','www.amazon.com','www.amazon.com','Fire starter','any',3),
+('Knife','www.amazon.com','www.amazon.com','You can never have too many knives','any',15),
+('Shovel','www.amazon.com','www.amazon.com','Dig out buried persons or items','Quake',20),
+('Tarp','www.amazon.com','www.amazon.com','Keep whats important dry','Flood',25),
+('Water','www.amazon.com','www.amazon.com','About a gallon a day per person','any',5)
 ;
 
 

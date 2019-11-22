@@ -45,7 +45,6 @@ const BagsService = {
     return db.select('id')
       .from('bugout_items')
       .whereRaw('situation = ?', [situation])
-      .orWhere('situation', 'any')
       .returning('id');
   },
   insertSituationItems(db, item_id, user_id, bag_id) {
@@ -60,7 +59,20 @@ const BagsService = {
   deleteBag(db,id){
     return BagsService.getById(db, id)
       .delete();
-  }
+  },
+  updateBagItem(db, item_id, bag_id, owned){
+    console.log('made it to the bag items');
+    console.log('item_id is making it here as', item_id, 'with type of', typeof item_id);
+    console.log('bag_id is making it here as', bag_id, 'with type of', typeof bag_id);
+    console.log('owned is making it here as', owned, 'with type of', typeof owned);
+    return db
+      .select('item_id', 'bag_id', 'owned')
+      .from('bag_items')
+      .where('item_id', item_id)
+      .andWhere('bag_id', bag_id)
+      .update({'owned': owned});
+  },
 };
+
 
 module.exports = BagsService;

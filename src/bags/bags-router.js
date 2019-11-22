@@ -2,7 +2,7 @@ const express = require('express');
 const BagsService = require('./bags-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 const bagsRouter = express.Router();
-
+const jsonBodyParser = express.json();
 
 
 bagsRouter
@@ -22,12 +22,7 @@ bagsRouter
     //console.log('getBagItems is being called', req.params.bag_id);
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => res.json(bag));
-  });
-
-
-
-bagsRouter
-  .route('/:bag_id')
+  })
   .delete(requireAuth, (req, res, next) => {
     console.log(req.params.bag_id);
     BagsService.deleteBag(
@@ -42,7 +37,23 @@ bagsRouter
           return console.log('its been deleted');
         }
       });
-  });
+  })
+  .patch(requireAuth,jsonBodyParser, (req, res, next) =>{
+    BagsService.updateBagItem(
+      req.app.get('db'), 
+      req.body.item_id, 
+      req.params.bag_id, 
+      req.body.owned)
+      .then(response => {
+        if(response){
+          return res.status(204).end();
+        } else {
+          return console.log('whoops this did not work');
+        }
+      });
+  })
+  
+  ;
 
 module.exports = bagsRouter;
 

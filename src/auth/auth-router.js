@@ -52,12 +52,13 @@ authRouter
                 });
         AuthService.addUser(req.app.get('db'), user_name, password)
             .then(result => {
-                console.log('succession');
                 return res.status(201).json({
                     message: 'user created'
                 });
             }).catch(next => {
-                console.log('failed');
+                return res.status(400, {
+                    error: 'Create new user failed'
+                });
             });
     });
 

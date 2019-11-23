@@ -25,4 +25,4 @@ const BagsService = {
     },
   };
   
-  module.exports = BagsService;
+  //module.exports = BagsService;

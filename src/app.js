@@ -24,6 +24,11 @@ const morganOption = (NODE_ENV === 'production')
   app.use('/situations', postBagsRouter);
   app.use('/bags', bagsRouter);
 
+  app.get('/', (req,res, next) => {
+    res.status(200).end();
+  });
+
+
   app.use(function errorHandler(error,req,res,next) {
     let response;
     if (NODE_ENV === 'production') {

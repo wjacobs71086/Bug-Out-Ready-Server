@@ -96,7 +96,7 @@ function makeItemsArray() {
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi.',
             situation: 'any',
             est_cost: 15
-        },
+        }
     ];
 }
 function makeUserBagsArray() {
@@ -202,7 +202,7 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
     return `Bearer ${token}`
 }
 
-function seedBagsTables(db, users, bags, items) {
+function seedBagsTables(db, users, items) {
     console.log(items);
     return db.transaction(async trx => {
         await seedUsers(trx, users);

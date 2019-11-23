@@ -143,6 +143,104 @@ function makeBagItemsArray() {
             item_id: 1,
             owned: false
         },
+        {
+            id: 2,
+            user_id: 1,
+            bag_id: 1,
+            item_id: 2,
+            owned: false
+        },
+        {
+            id: 3,
+            user_id: 1,
+            bag_id: 1,
+            item_id: 3,
+            owned: false
+        },
+        {
+            id: 4,
+            user_id: 1,
+            bag_id: 2,
+            item_id: 1,
+            owned: false
+        },
+        {
+            id: 5,
+            user_id: 1,
+            bag_id: 2,
+            item_id: 2,
+            owned: false
+        },
+        {
+            id: 6,
+            user_id: 1,
+            bag_id: 2,
+            item_id: 3,
+            owned: false
+        },
+        {
+            id: 7,
+            user_id: 2,
+            bag_id: 3,
+            item_id: 4,
+            owned: false
+        },
+        {
+            id: 8,
+            user_id: 2,
+            bag_id: 3,
+            item_id: 5,
+            owned: false
+        },
+        {
+            id: 9,
+            user_id: 2,
+            bag_id: 3,
+            item_id: 1,
+            owned: false
+        },
+        {
+            id: 10,
+            user_id: 2,
+            bag_id: 3,
+            item_id: 2,
+            owned: false
+        },
+        {
+            id: 11,
+            user_id: 2,
+            bag_id: 3,
+            item_id: 3,
+            owned: false
+        },
+        {
+            id: 12,
+            user_id: 2,
+            bag_id: 3,
+            item_id: 6,
+            owned: false
+        },
+        {
+            id: 13,
+            user_id: 3,
+            bag_id: 4,
+            item_id: 1,
+            owned: false
+        },
+        {
+            id: 14,
+            user_id: 3,
+            bag_id: 4,
+            item_id: 2,
+            owned: false
+        },
+        {
+            id: 15,
+            user_id: 3,
+            bag_id: 4,
+            item_id: 3,
+            owned: false
+        },
     ];
 }
 function makeBagFixtures() {
@@ -202,15 +300,17 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
     return `Bearer ${token}`
 }
 
-function seedBagsTables(db, users, items) {
-    console.log(items);
+function seedBagsTables(db, users, items, bags, bagItems) {
+    //console.log(items);
     return db.transaction(async trx => {
         await seedUsers(trx, users);
         await trx.into('bugout_items').insert(items);
-        await trx.raw(
-            `SELECT setval('bugout_items_id_seq',?`,
-            [items[items.length - 1].id],
-        )
+        await trx.into('user_bags').insert(bags)
+        await trx.into('bag_items').insert(bagItems);
+        // await trx.raw(
+        //     `SELECT setval('bugout_items_id_seq',?`,
+        //     [items[items.length - 1].id],
+        // )
     });
 }
 

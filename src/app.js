@@ -19,6 +19,7 @@ const morganOption = (NODE_ENV === 'production')
   app.use(cors());
 
   app.use('/api/auth', authRouter);
+  //-----i don't think the items endpoint is being used
   app.use('/items', itemsRouter);
   app.use('/bag-home', bagsRouter);
   app.use('/situations', postBagsRouter);

@@ -12,7 +12,7 @@ describe('AUTH ENDPOINTS', () => {
     before('Make the Knex Instance', () => {
         db = knex({
             client: 'pg',
-            connection: process.env.TEST_DB_URL,
+            connection: process.env.TEST_DATABASE_URL,
         });
         app.set('db', db);
     });
@@ -70,7 +70,6 @@ describe('AUTH ENDPOINTS', () => {
                     algorithm: 'HS256',
                 }
             );
-           console.log('this is the expected token',expectedToken);
             return supertest(app)
                 .post('/api/auth/login')
                 .send(userValidCredentials)

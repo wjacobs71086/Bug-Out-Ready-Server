@@ -31,7 +31,7 @@ bagsRouter
             error: 'Delete unsuccessful'
           });
         } else {
-          return res.status(204);
+          return res;
         }
       });
   })

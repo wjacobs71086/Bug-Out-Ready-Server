@@ -292,7 +292,6 @@ function cleanTables(db) {
 
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
-    //console.log(process.env.JWT_SECRET);
     const token = jwt.sign({ user_id: user.id }, secret, {
         subject: user.user_name,
         algorithm: 'HS256',
@@ -301,16 +300,11 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 }
 
 function seedBagsTables(db, users, items, bags, bagItems) {
-    //console.log(items);
     return db.transaction(async trx => {
         await seedUsers(trx, users);
         await trx.into('bugout_items').insert(items);
         await trx.into('user_bags').insert(bags)
         await trx.into('bag_items').insert(bagItems);
-        // await trx.raw(
-        //     `SELECT setval('bugout_items_id_seq',?`,
-        //     [items[items.length - 1].id],
-        // )
     });
 }
 

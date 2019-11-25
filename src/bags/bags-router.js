@@ -19,7 +19,10 @@ bagsRouter
   .route('/:bag_id')
   .get(requireAuth, (req, res) => {
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
-      .then(bag => res.json(bag));
+      .then(bag => {
+        console.log('This was received from the DB search for bag Items',bag);
+        return res.json(bag);
+      });
   })
   .delete(requireAuth, (req, res, next) => {
     BagsService.deleteBag(

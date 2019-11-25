@@ -28,6 +28,7 @@ bagsRouter
       req.app.get('db'),
       req.params.bag_id)
       .then(res => {
+        console.log(`Delete of bag ID ${req.params.bag_id} was heard`);
         if (!res) {
           return res.status(400, {
             error: 'Delete unsuccessful'

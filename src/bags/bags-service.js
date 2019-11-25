@@ -55,6 +55,7 @@ const BagsService = {
       });
   },
   deleteBag(db, id) {
+    console.log('Delete BAG call to the DB was heard and recieved and ID of',  id);
     return BagsService.getById(db, id)
       .delete();
   },

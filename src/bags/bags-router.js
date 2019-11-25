@@ -24,6 +24,7 @@ bagsRouter
       });
   })
   .delete(requireAuth, (req, res, next) => {
+    console.log('Delete method called');
     BagsService.deleteBag(
       req.app.get('db'),
       req.params.bag_id)

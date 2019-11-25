@@ -20,7 +20,6 @@ bagsRouter
   .get(requireAuth, (req, res) => {
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => {
-        console.log('This was received from the DB search for bag Items',bag);
         return res.json(bag);
       });
   })

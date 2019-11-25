@@ -11,7 +11,6 @@ const BagsService = {
       .first();
   },
   getBagItems(db, id) {
-    console.log('This was passed in as the id',id, 'with a type of',  typeof id);
     return db
       .select(
         'bag_id',

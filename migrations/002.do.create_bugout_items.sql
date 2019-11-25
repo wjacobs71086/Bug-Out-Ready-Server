@@ -3,7 +3,7 @@ CREATE TABLE bugout_items (
     item_name TEXT NOT NULL,
     url TEXT NOT NULL,
     img TEXT NOT NULL,
-    description TEXT,
+    description varchar(500),
     situation TEXT NOT NULL,
     est_cost numeric
 );

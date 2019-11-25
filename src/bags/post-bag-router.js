@@ -36,10 +36,8 @@ postBagsRouter
                                     }
                                 });
                         });
-
                         if (statusBool) {
-                            //TODO: Set this to the depolyed endpoint variable
-                            return res.status(201).location(`localhost:3000/bag-home/${bag_id}`).json({ bag_id: bag_id });
+                            return res.status(201).location(`https://secret-peak-79739.herokuapp.com/bag-home/${bag_id}`).json({ bag_id: bag_id });
                         } else {
                             return res.status(500).end();
                         }

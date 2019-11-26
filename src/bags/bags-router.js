@@ -18,13 +18,14 @@ bagsRouter
 bagsRouter
   .route('/:bag_id')
   .get(requireAuth, (req, res) => {
+      console.log(req.user.user_id);
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => {
+
         return res.json(bag);
       });
   })
   .delete(requireAuth, (req, res, next) => {
-    console.log('Delete method called');
     BagsService.deleteBag(
       req.app.get('db'),
       req.params.bag_id)

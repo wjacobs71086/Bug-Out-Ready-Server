@@ -24,7 +24,15 @@ bagsRouter
       req.app.get('db'),
       req.user.id,
       req.params.bag_id
-    ).then(res => res);
+    ).then(response => {
+      if (response) {
+        return res.status(204).end();
+      } else {
+        return res.status(400, {
+          error: 'Update failed'
+        });
+      }
+    });
       console.log('this is what is returned from the Verify Call',owned);
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => {

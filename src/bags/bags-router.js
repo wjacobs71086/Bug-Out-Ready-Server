@@ -20,11 +20,12 @@ bagsRouter
   .get(requireAuth, (req, res) => {
       // console.log('user ID is ', req.user.id);
       // console.log('bagID is picked up as ', req.params.bag_id);
-    console.log(BagsService.verifyBagOwner(
+    let owned = BagsService.verifyBagOwner(
       req.app.get('db'),
       req.user.id,
       req.params.bag_id
-    ));
+    ).then(res => res);
+      console.log('this is what is returned from the Verify Call',owned);
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => {
 

@@ -71,7 +71,8 @@ const BagsService = {
     return db('user_bags')
       .select('*')
       .where('bag_id', bag_id)
-      .andWhere('user_id', user_id);
+      .andWhere('user_id', user_id)
+      .first();
   }
 };
 

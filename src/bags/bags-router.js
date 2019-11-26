@@ -28,16 +28,10 @@ bagsRouter
     BagsService.deleteBag(
       req.app.get('db'),
       req.params.bag_id)
-      .then(res => {
-        console.log(`Delete of bag ID ${req.params.bag_id} was heard`);
-        if (!res) {
-          return res.status(400, {
-            error: 'Delete unsuccessful'
-          });
-        } else {
-          return res.end();
-        }
-      });
+      .then(numRowsAffected => {
+        res.status(204).end();
+    })
+    .catch(next);
   })
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     BagsService.updateBagItem(

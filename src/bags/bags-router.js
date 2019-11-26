@@ -18,13 +18,18 @@ bagsRouter
 bagsRouter
   .route('/:bag_id')
   .get(requireAuth, (req, res) => {
-      console.log('user ID is ', req.user.id);
-      console.log('bagID is picked up as ', req.params.bag_id);
-    BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
+      // console.log('user ID is ', req.user.id);
+      // console.log('bagID is picked up as ', req.params.bag_id);
+    if(BagsService.verifyBagOwner(req.app.get('db'), req.user.id,req.params.bag_id)){
+          BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => {
 
         return res.json(bag);
       });
+    } else {
+      console.log('This is not your bag');
+    }
+
   })
   .delete(requireAuth, (req, res, next) => {
     BagsService.deleteBag(

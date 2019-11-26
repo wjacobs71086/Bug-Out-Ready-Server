@@ -66,6 +66,13 @@ const BagsService = {
       .andWhere('bag_id', bag_id)
       .update({ 'owned': owned });
   },
+  verifyBagOwner(db, user_id, bag_id){
+    console.log('made it to verify Owner call.');
+    return db('user_bags')
+      .select('*')
+      .where('bag_id', bag_id)
+      .andWhere('user_id', user_id);
+  }
 };
 
 

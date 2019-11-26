@@ -51,7 +51,3 @@ bagsRouter
   });
 
 module.exports = bagsRouter;
-
-
-
-

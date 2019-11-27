@@ -1,26 +1,13 @@
-# Express Boilerplate!
+# Bug Out Ready
 
-This is a boilerplate project used for starting new projects!
+Things don't always go as planned. You can't bre ready for everything. You can however be ready for some common natural disasters and emergencies in general. This app is meant to be a starting point. A catalyst for though about what would you do in those situations? Would you be ready?
 
-## Set up
+## Sign in
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+In this app there is a demo mode with a User Name: Ready, with Password: Go.
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+You have the option to have multiple bags incase you would like to have one for the car and maybe one for a specific emergency. 
 
-## Scripts
+## Disclaimer
 
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+This is not meant to be a perfect list and is far from it. Add your own flair to your personal bag and feel free to reach out with items you'd like to see added and why. 

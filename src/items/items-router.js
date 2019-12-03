@@ -1,3 +1,5 @@
+// This is intended to support finding specific items but is currently un-used. 
+
 const express = require('express');
 const ItemsService = require('./items-service');
 

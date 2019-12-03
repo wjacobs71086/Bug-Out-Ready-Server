@@ -1,3 +1,4 @@
+// These services deal with the database queries and posting. Pay close attention to retrieving the bag or the items.  
 const BagsService = {
   getAllBags(db) {
     return db

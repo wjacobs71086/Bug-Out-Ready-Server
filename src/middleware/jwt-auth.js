@@ -1,7 +1,10 @@
 /* eslint-disable quotes */
+//------ This is the Middleware for validating the user. 
 const AuthService = require('../auth/auth-service');
 
 function requireAuth(req, res, next) {
+
+//---- Verifies the Authorization
     const authToken = req.get(`Authorization`) || '';
     let bearerToken;
     if (!authToken.toLowerCase().startsWith('bearer ')) {
@@ -9,7 +12,7 @@ function requireAuth(req, res, next) {
     } else {
         bearerToken = authToken.slice(7, authToken.length);
     }
-
+//----- Verifies the validity of the bearer token, then checks the existence and correctness of the user_name and password provided. 
     try {
         const payload = AuthService.verifyJwt(bearerToken);
 

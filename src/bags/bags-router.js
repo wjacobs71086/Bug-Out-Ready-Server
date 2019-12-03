@@ -17,6 +17,7 @@ bagsRouter
       .catch(next);
   });
 
+  //------- This is a dynamic route to bring in the items that are associated with the bag_id, Has  GET, DELETE, and PATCH methods available.
 bagsRouter
   .route('/:bag_id')
   .get(requireAuth, (req, res) => {
@@ -24,25 +25,6 @@ bagsRouter
       .then(bag => {
         return res.json(bag);
       });
-  })
-  .post(requireAuth, (req, res, next) => {
-    const user_id = req.user.id;
-    BagsService.createNewBagItem(
-      req.app.get('db'),
-      req.body.item_name,
-      req.body.url,
-      req.body.img,
-      req.body.description,
-      req.body.est_cost
-    )
-    .then(item => {
-      BagsService.insertSituationItems(
-        req.app.get('db'),
-        item.id,
-        user_id,
-        item.bag_id
-      );
-  });
   })
   .delete(requireAuth, (req, res, next) => {
     BagsService.deleteBag(

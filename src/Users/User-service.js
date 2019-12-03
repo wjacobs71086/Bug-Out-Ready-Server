@@ -1,3 +1,5 @@
+//----- Currently unused but will potentially be added for future features. 
+
 const BagsService = {
     getAllBags(db) {
       return db

@@ -1,7 +1,10 @@
+// Required dependencies. 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
+
+// These services deal with the database queries, password hashing, and comparison. 
 const AuthService = {
   getUserWithUserName(db, user_name) {
     return db('bugout_users')

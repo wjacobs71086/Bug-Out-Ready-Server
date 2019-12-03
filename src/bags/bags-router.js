@@ -1,10 +1,12 @@
+// Dependencies and required components 
 const express = require('express');
 const BagsService = require('./bags-service');
+// This is what's validating the user and the Auth token.
 const { requireAuth } = require('../middleware/jwt-auth');
 const bagsRouter = express.Router();
 const jsonBodyParser = express.json();
 
-
+//------- GET route for pulling all of the bags registered to the user provided. Required a valid JWT, and "user.id"
 bagsRouter
   .route('/')
   .get(requireAuth, (req, res, next) => {
@@ -18,12 +20,29 @@ bagsRouter
 bagsRouter
   .route('/:bag_id')
   .get(requireAuth, (req, res) => {
-      // console.log('user ID is ', req.user.id);
-      // console.log('bagID is picked up as ', req.params.bag_id);
     BagsService.getBagItems(req.app.get('db'), `${req.params.bag_id}`)
       .then(bag => {
         return res.json(bag);
       });
+  })
+  .post(requireAuth, (req, res, next) => {
+    const user_id = req.user.id;
+    BagsService.createNewBagItem(
+      req.app.get('db'),
+      req.body.item_name,
+      req.body.url,
+      req.body.img,
+      req.body.description,
+      req.body.est_cost
+    )
+    .then(item => {
+      BagsService.insertSituationItems(
+        req.app.get('db'),
+        item.id,
+        user_id,
+        item.bag_id
+      );
+  });
   })
   .delete(requireAuth, (req, res, next) => {
     BagsService.deleteBag(
@@ -50,5 +69,5 @@ bagsRouter
         }
       });
   });
-
+  
 module.exports = bagsRouter;

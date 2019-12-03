@@ -59,21 +59,30 @@ const BagsService = {
       .delete();
   },
   updateBagItem(db, item_id, bag_id, owned) {
-    return db
-      .select('item_id', 'bag_id', 'owned')
-      .from('bag_items')
+    return db('bag_items')
       .where('item_id', item_id)
       .andWhere('bag_id', bag_id)
       .update({ 'owned': owned });
   },
   verifyBagOwner(db, user_id, bag_id){
-    console.log('made it to verify Owner call.');
     return db('user_bags')
       .select('*')
       .where('bag_id', bag_id)
       .andWhere('user_id', user_id)
       .first();
-  }
+  },
+  createNewBagItem(db, item_name, url, img, description, est_cost){
+    return db('bugout_items')
+      .insert({
+        item_name,
+        url,
+        img,
+        description,
+        situation: null,
+        est_cost
+      })
+      .returning('id').then(rows => rows[0]);
+  },
 };
 
 

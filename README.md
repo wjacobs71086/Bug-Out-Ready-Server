@@ -2,30 +2,21 @@
 
 Things don't always go as planned. You can't bre ready for everything. You can however be ready for some common natural disasters and emergencies in general. This app is meant to be a starting point. A catalyst for though about what would you do in those situations? Would you be ready?
 
-## Sign in
 
-In this app there is a demo mode with a User Name: Ready, with Password: Go.
+## API Endpoints
+bugoutready.now.sh/api/auth 
+    This endpoint is used for authentication of login and registration. This has a new "/sign-up" for the creation of a new user with "user_name", and "password" in the request body.
+    "/login" uses the same body requirements but stores the password hashed and requires JWT to auth. 
 
-You have the option to have multiple bags incase you would like to have one for the car and maybe one for a specific emergency. 
+bugoutready.now.sh/situations
+    This endpoint is for creating a new bag. It takes a POST method requiring Authentication through JWT. The request body must have a "bag_name", "situations", and "user_id". The creation creates a new bag and populates it with items based on the situation. It will return the location/URL for the bag. 
+
+bugoutready.now.sh/bags
+    This endpoint is a GET method endpoint. 
+    The GET route requires a user.id in the body and will return all bags that are identified as the users. 
+bugoutready.now.sh/bag-home
+    This endpoint has a GET, DELETE, and PATCH method available. 
+    This is to get the items in the specific bag, delete that bag, and PATCH when an item is selected as owned. All routes require authentication and the "bag_id". The PATCH route also requires the "item_id" and updated "owned" status.
 
 
-## ScreenShots
-![SplashPage](./SplashPage_img.png)
-![Bags-list](./bags-list_img.png)
-![Situations-route](situations-route_img.png)
-![item-list](./item-list_img.png)
-
-## Technical Info and Startup
-This application was built using react,  html, css, jest, vanilla JS, and JWT for the client side tech stack. Express, Postgresql, supertest, mocha, chai, postgrator bcrypt and JWT are used on the  server side to authenticate, handle requests and build the database. 
-
-This app on a base level uses Browser Router to handle URL switches with the routes being contained in the routes folder in src. The other primary components( forms, items, bags, etc..) are stored in the src folder. 
-
-This app is made to demo purposes and is only expected to be used to show knowledge and was not intended to be re-used for other purposes. With that said, as a developer if you see something you would like clarity on or would like to include in a project of your own please message me for information. 
-
-If you would like to try the application locally simply clone the repos, run NPM INSTALL and begin.
-Client Repo: https://github.com/wjacobs71086/Bug-Out-Ready-Client.git
-API Repo: https://github.com/wjacobs71086/Bug-Out-Ready-Server.git
-
-## Disclaimer
-
-This is not meant to be a perfect list and is far from it. Add your own flair to your personal bag and feel free to reach out with items you'd like to see added and why. 
+ 

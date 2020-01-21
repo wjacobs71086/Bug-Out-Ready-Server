@@ -1,4 +1,3 @@
-// This will be the support functions for the testing suites. will need to fill data for the tests. The 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 

@@ -44,9 +44,17 @@ itemsRouter
         req.app.get('db'),
         item,
         user_id,
-        1
+        req.body.bag_id
       );
-  });
+  }).then(response => {
+    if (response) {
+      return res.status(201).end();
+    } else {
+      return res.status(400, {
+        error: 'Create item failed'
+      });
+    }
+  }).catch(next)
   })
 
   module.exports = itemsRouter;

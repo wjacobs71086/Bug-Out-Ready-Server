@@ -14,6 +14,9 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
+// TODO: Refactor the promise calls to use async await syntax when possible. 
+// there is one function in the BAGS router that will not allow this.
+
   app.use(morgan(morganOption));
   app.use(helmet());
   app.use(cors());

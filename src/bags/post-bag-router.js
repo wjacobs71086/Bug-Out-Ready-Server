@@ -10,7 +10,6 @@ postBagsRouter
 
         const user_id = req.user.id;
         const situation = req.body.situations;
-
         BagsService.createNewBag(
             req.app.get('db'),
             req.body.bag_name,

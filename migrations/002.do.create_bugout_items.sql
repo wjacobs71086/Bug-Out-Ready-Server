@@ -4,6 +4,6 @@ CREATE TABLE bugout_items (
     url TEXT NOT NULL,
     img TEXT NOT NULL,
     description varchar(500),
-    situation TEXT NOT NULL,
+    situation TEXT NULL,
     est_cost numeric
 );

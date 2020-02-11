@@ -47,6 +47,7 @@ const BagsService = {
       .returning('id');
   },
   insertSituationItems(db, item_id, user_id, bag_id) {
+    console.log('what has reached the SQL call',{user_id: user_id, item_id: item_id, bag_id: bag_id})
     return db('bag_items')
       .insert({
         user_id,
@@ -71,18 +72,7 @@ const BagsService = {
       .andWhere('user_id', user_id)
       .first();
   },
-  createNewBagItem(db, item_name, url, img, description, est_cost){
-    return db('bugout_items')
-      .insert({
-        item_name,
-        url,
-        img,
-        description,
-        situation: null,
-        est_cost
-      })
-      .returning('id').then(rows => rows[0]);
-  },
+
 };
 
 

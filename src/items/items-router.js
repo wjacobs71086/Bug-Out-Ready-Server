@@ -2,6 +2,9 @@
 
 const express = require('express');
 const ItemsService = require('./items-service');
+const BagsService = require('../bags/bags-service');
+const { requireAuth } = require('../middleware/jwt-auth');
+const jsonBodyParser = express.json();
 
 const itemsRouter = express.Router();
 
@@ -21,5 +24,29 @@ itemsRouter
       ItemsService.getById(req.app.get('db'), `${req.params.item_id}`)
       .then(item => res.json(item));
   });
+
+  itemsRouter
+  .route('/')
+  .post(requireAuth, jsonBodyParser,  (req, res, next) => {
+    const user_id = req.user.id;
+    console.log('User Data',req.user);
+    console.log('request Body =>', req.body)
+    ItemsService.createNewBagItem(
+      req.app.get('db'),
+      req.body.item_name,
+      req.body.url,
+      req.body.img,
+      req.body.description,
+      req.body.est_cost
+    )
+    .then(item => {
+      return BagsService.insertSituationItems(
+        req.app.get('db'),
+        item,
+        user_id,
+        1
+      );
+  });
+  })
 
   module.exports = itemsRouter;

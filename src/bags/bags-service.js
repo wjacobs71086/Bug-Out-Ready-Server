@@ -47,7 +47,6 @@ const BagsService = {
       .returning('id');
   },
   insertSituationItems(db, item_id, user_id, bag_id) {
-    console.log('what has reached the SQL call',{user_id: user_id, item_id: item_id, bag_id: bag_id})
     return db('bag_items')
       .insert({
         user_id,

@@ -8,6 +8,37 @@ const jsonBodyParser = express.json();
 
 const itemsRouter = express.Router();
 
+
+itemsRouter
+.route('/')
+.post(requireAuth, jsonBodyParser, (req, res, next) => {
+  const user_id = req.user.id;
+  ItemsService.createNewBagItem(
+    req.app.get('db'),
+    req.body.item_name,
+    req.body.url,
+    req.body.img,
+    req.body.description,
+    req.body.est_cost
+  )
+  .then(item => {
+    return BagsService.insertSituationItems(
+      req.app.get('db'),
+      item,
+      user_id,
+      req.body.bag_id
+    );
+}).then(response => {
+  if (response) {
+    return res.status(201);
+  } else {
+    return res.status(400, {
+      error: 'Create item failed'
+    });
+  }
+}).catch(next)
+})
+
 itemsRouter
   .route('/')
   .get((req, res, next) => {
@@ -24,37 +55,5 @@ itemsRouter
       ItemsService.getById(req.app.get('db'), `${req.params.item_id}`)
       .then(item => res.json(item));
   });
-
-  itemsRouter
-  .route('/')
-  .post(requireAuth, jsonBodyParser,  (req, res, next) => {
-    const user_id = req.user.id;
-    console.log('User Data',req.user);
-    console.log('request Body =>', req.body)
-    ItemsService.createNewBagItem(
-      req.app.get('db'),
-      req.body.item_name,
-      req.body.url,
-      req.body.img,
-      req.body.description,
-      req.body.est_cost
-    )
-    .then(item => {
-      return BagsService.insertSituationItems(
-        req.app.get('db'),
-        item,
-        user_id,
-        req.body.bag_id
-      );
-  }).then(response => {
-    if (response) {
-      return res.status(201).end();
-    } else {
-      return res.status(400, {
-        error: 'Create item failed'
-      });
-    }
-  }).catch(next)
-  })
 
   module.exports = itemsRouter;

@@ -24,7 +24,7 @@ itemsRouter
   .then(item => {
     return BagsService.insertSituationItems(
       req.app.get('db'),
-      item,
+      item.id,
       user_id,
       req.body.bag_id
     );

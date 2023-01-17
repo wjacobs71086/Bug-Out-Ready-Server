@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 module.exports = {
-    "migrationsDirectory": __dirname + '/migrations',
+    "migrationsDirectory": 'migrations',
     "driver": "pg",
     "database": process.env.TEST_DATABASE_URL,
     "connectionString": (process.env.NODE_ENV === 'test')

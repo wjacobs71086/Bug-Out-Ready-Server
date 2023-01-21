@@ -19,6 +19,7 @@ postBagsRouter
                 situationItems.forEach(async (item) => {
                     await BagsService.insertSituationItems(db, item.id, user_id, newBag.bag_id)
                 });
+                return res.status(201).json({ bag_id: newBag.bag_id })
             }
         } catch (error) {
             console.log('error found');
